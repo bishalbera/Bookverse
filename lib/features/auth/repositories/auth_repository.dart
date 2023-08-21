@@ -26,6 +26,8 @@ class AuthRepository {
       String uid = FirebaseAuth.instance.currentUser?.uid ?? '';
 
       UserModel newModel = UserModel(
+          booksRead: '0',
+          verseCoins: '0',
           name: model.name,
           uid: uid,
           email: model.email,

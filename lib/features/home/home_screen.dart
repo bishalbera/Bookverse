@@ -13,7 +13,7 @@ import '../room_creation/room_creation_screen.dart';
 import '../join_room/screens/join_room_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -60,8 +60,12 @@ class _HomeScreenState extends State<HomeScreen> {
             return data['items'][index + 1]['volumeInfo']['title'];
           });
           _bookImages = List.generate(4, (index) {
-            return data['items'][index]['volumeInfo']['imageLinks']
-                ['thumbnail'];
+            if (data['items'][index]['volumeInfo']['imageLinks'] != null) {
+              return data['items'][index]['volumeInfo']['imageLinks']
+                  ['thumbnail'];
+            } else {
+              return ''; // Handle missing image links
+            }
           });
         });
       }
@@ -227,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: ElevatedButton.styleFrom(
                                 primary: Colors.blueAccent),
                             onPressed: () {
-                            moveScreen(context, JoinRoomScreen());
+                              moveScreen(context, JoinRoomScreen());
                             },
                             child: Text(
                               "Join a Room",
@@ -246,6 +250,19 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomeScreen(),
     );
   }
 }

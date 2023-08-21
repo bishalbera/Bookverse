@@ -22,6 +22,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void signUp(BuildContext context) {
     UserModel model = UserModel(
+        booksRead: '0',
+        verseCoins: '0',
         name: _nameController.text,
         uid: '',
         email: _emailController.text,

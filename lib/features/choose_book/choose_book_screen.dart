@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:book_verse/common/button_with_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
@@ -205,6 +206,7 @@ class BookDetailsScreen extends StatelessWidget {
   }) : super(key: key);
 
   void _launchURL() async {
+    print("$book['previewLink'] is the preview link");
     if (book['previewLink'] != null) {
       String url = book['previewLink'];
       if (await canLaunch(url)) {
@@ -271,6 +273,8 @@ class BookDetailsScreen extends StatelessWidget {
                   ),
                 ),
               ),
+            const SizedBox(height: 20),
+            ButtonWithAnimation(),
           ],
         ),
       ),

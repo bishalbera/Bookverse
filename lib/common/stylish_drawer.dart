@@ -39,7 +39,7 @@ Widget buildStylishDrawer(BuildContext context) {
                 CircleAvatar(
                   radius: 50.0,
                   backgroundImage: NetworkImage(
-                      'https://cdn.discordapp.com/attachments/1091713413106901112/1143189047028744202/image.png'), // Add your profile image asset
+                      'https://media.discordapp.net/attachments/1091713413106901112/1143208237173321738/image.png?width=66&height=88'), // Add your profile image asset
                 ),
                 SizedBox(height: 10.0),
                 Text(

@@ -77,17 +77,20 @@ class _AnimatedButtonState extends State<AnimatedButton>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 300), // Adjusted duration
       vsync: this,
       lowerBound: 0.0,
-      upperBound: 0.1,
+      upperBound: 0.05, // Adjusted upperBound
     )..addListener(() {
         setState(() {});
       });
     _scaleAnimation = Tween<double>(
       begin: 1.0,
-      end: 0.9,
-    ).animate(_controller);
+      end: 0.95, // Adjusted end value
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOut, // Use a curve for smoother animation
+    ));
   }
 
   @override
@@ -119,9 +122,9 @@ class _AnimatedButtonState extends State<AnimatedButton>
             borderRadius: BorderRadius.circular(10.0),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.4),
+                color: Colors.black.withOpacity(0.2), // Adjusted shadow opacity
                 offset: Offset(5.0, 5.0),
-                blurRadius: 5.0,
+                blurRadius: 10.0, // Adjusted blur radius
               ),
             ],
           ),
@@ -135,6 +138,19 @@ class _AnimatedButtonState extends State<AnimatedButton>
           ),
         ),
       ),
+    );
+  }
+}
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: RoomCreationScreen(),
     );
   }
 }
