@@ -23,7 +23,7 @@ class _CodeRedemptionScreenState extends State<CodeRedemptionScreen> {
       appBar: AppBar(
         title: const Text('Code Redemption'),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           children: [
             Text("Redeem your code here"),
