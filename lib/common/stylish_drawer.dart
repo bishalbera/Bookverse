@@ -30,11 +30,11 @@ Widget buildStylishDrawer(BuildContext context) {
           Container(
             padding: const EdgeInsets.only(top: 40.0, bottom: 20.0),
             decoration: BoxDecoration(
-<<<<<<< HEAD
-              color: primaryPurple,
-=======
               color: beige,
+            ),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircleAvatar(
                   radius: 50.0,
@@ -46,7 +46,7 @@ Widget buildStylishDrawer(BuildContext context) {
                   userName ?? "Guest User",
                   style: TextStyle(
                     fontSize: 22.0,
-                    color: Colors.white,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -54,7 +54,7 @@ Widget buildStylishDrawer(BuildContext context) {
                   currentUserEmail ?? "",
                   style: TextStyle(
                     fontSize: 18.0,
-                    color: Colors.white70,
+                    color: Colors.black,
                   ),
                 ),
               ],
