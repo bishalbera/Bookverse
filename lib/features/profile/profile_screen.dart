@@ -1,4 +1,5 @@
 import 'package:book_verse/features/guide/screens/guide_screen.dart';
+import 'package:book_verse/features/settings/screens/settings_screen.dart';
 import 'package:book_verse/features/wallet/screens/wallet_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -141,9 +142,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    ProfileWidget(
-                      icon: const Icon(Icons.settings),
-                      text: "Settings",
+                    InkWell(
+                      onTap: () {
+                        moveScreen(context, SettingsScreen());
+                      },
+                      child: ProfileWidget(
+                        icon: const Icon(Icons.settings),
+                        text: "Settings",
+                      ),
                     ),
                     const SizedBox(height: 10),
                     Divider(
