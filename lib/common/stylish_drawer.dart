@@ -11,9 +11,9 @@ import '../utils/move_screen.dart';
 import 'constants/constants.dart';
 
 Widget buildStylishDrawer(BuildContext context) {
-  Color primaryGreen = const Color.fromARGB(255, 170, 198, 241);
-  Color secondaryGreen = const Color.fromARGB(255, 129, 115, 207);
-  Color headerGreen = const Color.fromARGB(255, 74, 68, 248);
+  Color primaryPurple = Color(0xffB2A4FF);
+  Color secondaryPeach = Color(0xffFFB4B4);
+  Color beige = Color(0xffFFDEB4);
 
   return Drawer(
     child: Container(
