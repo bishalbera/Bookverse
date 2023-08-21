@@ -1,7 +1,11 @@
+import 'package:book_verse/features/auth/screens/signIn_screen.dart';
 import 'package:book_verse/features/home/home_screen.dart';
 import 'package:book_verse/utils/move_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../common/constants/constants.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -49,8 +53,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ),
             ElevatedButton(
               onPressed: () {
-                moveScreen(context, const HomeScreen(),
-                    isPushReplacement: true);
+                if (FirebaseAuth.instance.currentUser == null) {
+                  moveScreen(context, const SignInScreen());
+                } else {
+                  moveScreen(context, const HomeScreen());
+                }
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.deepPurple,

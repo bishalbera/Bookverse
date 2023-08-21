@@ -1,6 +1,8 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:book_verse/features/home/home_screen.dart';
 import 'package:book_verse/features/onBoarding/onBoarding_screen.dart';
 import 'package:book_verse/utils/gradient_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
@@ -29,7 +31,9 @@ class _SplashScreenState extends State<SplashScreen> {
       animationDuration: const Duration(seconds: 5),
       splashTransition: SplashTransition.fadeTransition,
       pageTransitionType: PageTransitionType.theme,
-      nextScreen: const OnBoardingScreen(),
+      nextScreen: FirebaseAuth.instance.currentUser != null
+          ? const HomeScreen()
+          : const OnBoardingScreen(),
     );
   }
 }
