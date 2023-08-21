@@ -5,6 +5,7 @@ import '../features/choose_book/choose_book_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/profile/profile_screen.dart';
 import '../utils/move_screen.dart';
+import 'constants/constants.dart';
 
 class MyCustomBottomNavigationBar extends StatefulWidget {
   const MyCustomBottomNavigationBar({super.key});
@@ -16,9 +17,13 @@ class MyCustomBottomNavigationBar extends StatefulWidget {
 
 class _MyCustomBottomNavigationBarState
     extends State<MyCustomBottomNavigationBar> {
-  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
+    //explaining to teammate
+    // I just made a constant variable in constants.dart
+    // which would have the selected Index
+    // so every screen can take directly from there
+    // but I'm using it from constants.dart bhaiya, that's the difference, so it's working now
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -30,6 +35,7 @@ class _MyCustomBottomNavigationBarState
         ],
       ),
       child: SafeArea(
+        
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
           child: GNav(

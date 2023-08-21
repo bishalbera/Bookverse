@@ -143,8 +143,8 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
                     TextButton(
                       onPressed: editRoomName,
                       child: Icon(
-                        Icons.edit,
-                        color: fontColor,
+                        Icons.edit, //yes , done bhaiya
+                        color: Colors.white,
                       ),
                     ),
                     const SizedBox(
@@ -153,7 +153,7 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
                     Text(
                       roomName,
                       style: GoogleFonts.barriecito(
-                        color: fontColor,
+                        color: Colors.white,
                         fontSize: 32,
                       ),
                     ),
@@ -166,7 +166,7 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
               Text(
                 "Please Choose a study room theme",
                 style: GoogleFonts.ptSans(
-                  color: fontColor,
+                  color: Colors.white,
                   fontSize: 16,
                 ),
               ),
@@ -250,7 +250,7 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
                       title: Text(
                         people[index].name,
                         style: GoogleFonts.poppins(
-                          color: fontColor,
+                          color: Colors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -258,7 +258,8 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
                       subtitle: Text(
                         people[index].email,
                         style: GoogleFonts.poppins(
-                          color: fontColor,
+                          color: Colors.white,
+                          //sure
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
                         ),
@@ -266,7 +267,7 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
                       trailing: Text(
                         people[index].status,
                         style: GoogleFonts.poppins(
-                          color: fontColor,
+                          color: Colors.white,
                           fontSize: 14,
                           // fontWeight: FontWeight.bold,
                         ),
