@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:book_verse/common/stylish_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
-import '../../common/bottom_navigation_bar.dart';
+import '../../../common/bottom_navigation_bar.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -58,8 +58,7 @@ class _ChooseBooksScreenState extends State<ChooseBooksScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: buildStylishDrawer(context),
-      bottomNavigationBar: const MyCustomBottomNavigationBar(),
+      bottomNavigationBar: MyCustomBottomNavigationBar(),
       appBar: AppBar(
         title: Text(
           'Book Search',
@@ -119,23 +118,16 @@ class _ChooseBooksScreenState extends State<ChooseBooksScreen> {
             ],
           ),
           Expanded(
-            child: ListView.builder(
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, // Set the number of columns here
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
+              ),
               itemCount: _books.length,
               itemBuilder: (context, index) {
                 var book = _books[index]['volumeInfo'];
-                return ListTile(
-                  title: Text(
-                    book['title'],
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  subtitle: Text(
-                    book['authors']?.join(', ') ?? 'Unknown Author',
-                    style: TextStyle(
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
+                return GestureDetector(
                   onTap: () async {
                     Navigator.push(
                       context,
@@ -144,6 +136,36 @@ class _ChooseBooksScreenState extends State<ChooseBooksScreen> {
                       ),
                     );
                   },
+                  child: Card(
+                    elevation: 2.0,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 100,
+                          alignment: Alignment.center,
+                          child: CachedNetworkImage(
+                            imageUrl: book['imageLinks']?['thumbnail'] ?? '',
+                            placeholder: (context, url) =>
+                                CircularProgressIndicator(),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            book['title'],
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               },
             ),
