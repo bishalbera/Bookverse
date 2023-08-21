@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
+import '../../common/bottom_navigation_bar.dart';
 import '../../utils/appBar.dart';
 import '../../utils/move_screen.dart';
 import '../room_creation/room_creation_screen.dart';
