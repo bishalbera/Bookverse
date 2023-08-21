@@ -11,9 +11,9 @@ import '../features/room_preview/room_preview_screen.dart';
 import '../utils/move_screen.dart';
 
 Widget buildStylishDrawer(BuildContext context) {
-  Color primaryGreen = const Color.fromARGB(255, 170, 198, 241);
-  Color secondaryGreen = const Color.fromARGB(255, 129, 115, 207);
-  Color headerGreen = const Color.fromARGB(255, 74, 68, 248);
+  Color primaryPurple = Color(0xffB2A4FF);
+  Color secondaryPeach = Color(0xffFFB4B4);
+  Color beige = Color(0xffFFDEB4);
 
   return Drawer(
     child: Stack(
@@ -22,8 +22,8 @@ Widget buildStylishDrawer(BuildContext context) {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                primaryGreen,
-                secondaryGreen,
+                primaryPurple,
+                secondaryPeach,
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -36,7 +36,7 @@ Widget buildStylishDrawer(BuildContext context) {
             Container(
               padding: const EdgeInsets.only(top: 40.0, bottom: 20.0),
               decoration: BoxDecoration(
-                color: headerGreen,
+                color: beige,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,7 +44,8 @@ Widget buildStylishDrawer(BuildContext context) {
                 children: [
                   CircleAvatar(
                     radius: 50.0,
-                    backgroundImage: AssetImage(''),
+                    backgroundImage: NetworkImage(
+                        'https://cdn.discordapp.com/attachments/1091713413106901112/1143163858916229280/image.png'),
                   ),
                   SizedBox(
                     height: 10.0,
@@ -66,6 +67,11 @@ Widget buildStylishDrawer(BuildContext context) {
                   ),
                 ],
               ),
+            ),
+            const Divider(
+              color: Colors.white,
+              height: 1.0,
+              thickness: 1.0,
             ),
             ListTile(
               leading: const Icon(
@@ -127,21 +133,21 @@ Widget buildStylishDrawer(BuildContext context) {
                 moveScreen(context, RoomCreationScreen());
               },
             ),
-            ListTile(
-              leading: const Icon(
-                Icons.preview,
-                color: Colors.white,
-              ),
-              title: const Text(
-                'Room preview',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              onTap: () {
-                moveScreen(context, const RoomPreviewScreen());
-              },
-            ),
+            // ListTile(
+            //   leading: const Icon(
+            //     Icons.preview,
+            //     color: Colors.white,
+            //   ),
+            //   title: const Text(
+            //     'Room preview',
+            //     style: TextStyle(
+            //       color: Colors.white,
+            //     ),
+            //   ),
+            //   onTap: () {
+            //     moveScreen(context, const RoomPreviewScreen());
+            //   },
+            // ),
             ListTile(
               leading: const Icon(
                 Icons.logout,
