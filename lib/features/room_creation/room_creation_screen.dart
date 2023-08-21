@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../common/stylish_drawer.dart';
 import '../../utils/appBar.dart';
 import '../../utils/move_screen.dart';
 import '../room_details/room_details_screens.dart';
@@ -42,6 +43,7 @@ class _RoomCreationScreenState extends State<RoomCreationScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: makeAppBar(context),
+      drawer: buildStylishDrawer(context),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

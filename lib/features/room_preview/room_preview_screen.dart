@@ -4,6 +4,7 @@ import 'package:book_verse/features/room_preview/widgets/animated_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../common/stylish_drawer.dart';
 import '../../utils/appBar.dart';
 
 class RoomPreviewScreen extends StatefulWidget {
@@ -115,6 +116,7 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: buildStylishDrawer(context),
       appBar: makeAppBar(context,
           bgColor: selectedThemeIndex == 1 ? Colors.white : Colors.black,
           fontColor: selectedThemeIndex == 1 ? Colors.black : Colors.white),

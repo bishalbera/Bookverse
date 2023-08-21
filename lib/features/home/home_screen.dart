@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../../common/bottom_navigation_bar.dart';
+import '../../common/stylish_drawer.dart';
 import '../../utils/appBar.dart';
 import '../../utils/move_screen.dart';
 import '../room_creation/room_creation_screen.dart';
@@ -48,7 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: MyCustomBottomNavigationBar(),
+      bottomNavigationBar: const MyCustomBottomNavigationBar(),
+      drawer: buildStylishDrawer(context),
       appBar: makeAppBar(context),
       body: SingleChildScrollView(
         child: Column(

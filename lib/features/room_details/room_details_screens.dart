@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../common/stylish_drawer.dart';
 import '../../utils/appBar.dart';
 import '../../utils/move_screen.dart';
 import '../room_preview/room_preview_screen.dart';
@@ -28,8 +29,8 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen>
       lowerBound: 0.0,
       upperBound: 0.1,
     )..addListener(() {
-      setState(() {});
-    });
+        setState(() {});
+      });
     _scaleAnimation = Tween<double>(
       begin: 1.0,
       end: 0.9,
@@ -65,6 +66,7 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: makeAppBar(context),
+      drawer: buildStylishDrawer(context),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

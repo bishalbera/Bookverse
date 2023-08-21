@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:book_verse/common/stylish_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
@@ -57,7 +58,8 @@ class _ChooseBooksScreenState extends State<ChooseBooksScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: MyCustomBottomNavigationBar(),
+      drawer: buildStylishDrawer(context),
+      bottomNavigationBar: const MyCustomBottomNavigationBar(),
       appBar: AppBar(
         title: Text(
           'Book Search',
