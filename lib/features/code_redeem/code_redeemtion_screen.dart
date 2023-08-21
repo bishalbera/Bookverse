@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:confetti/confetti.dart';
 
 class CodeRedemptionScreen extends StatefulWidget {
-  const CodeRedemptionScreen({super.key});
+  const CodeRedemptionScreen({Key? key}) : super(key: key);
 
   @override
   State<CodeRedemptionScreen> createState() => _CodeRedemptionScreenState();
@@ -61,11 +61,48 @@ class _CodeRedemptionScreenState extends State<CodeRedemptionScreen> {
                   ),
                 ),
                 SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
+                GestureDetector(
+                  onTap: () {
                     _confettiController.play();
+                    // TODO: Add code redemption logic here
                   },
-                  child: Text('Redeem'),
+                  child: Container(
+                    width: 150,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.blue, Colors.purple],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(25),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 300),
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            'Redeem',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -81,7 +118,7 @@ class _CodeRedemptionScreenState extends State<CodeRedemptionScreen> {
                 Colors.blue,
                 Colors.pink,
                 Colors.orange,
-                Colors.purple
+                Colors.purple,
               ],
             ),
           ),
