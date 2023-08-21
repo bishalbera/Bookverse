@@ -30,7 +30,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             // ),
             Text(
               'Welcome to \n'
-              'Book Verse',
+              'TheBookVerse',
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,

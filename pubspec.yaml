@@ -47,7 +47,8 @@ dependencies:
   url_launcher: ^6.1.12
   http: ^1.1.0
   cached_network_image: ^3.2.3
-  hexcolor:
+  share_plus: ^7.1.0
+  confetti: ^0.7.0
 
 dev_dependencies:
   flutter_test:

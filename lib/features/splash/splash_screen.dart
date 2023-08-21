@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       splash: GradientText(
-          text: "Bookverse",
+          text: "TheBookVerse",
           gradient:
               const LinearGradient(colors: [Colors.blue, Colors.redAccent]),
           style: GoogleFonts.poppins(
