@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -20,6 +21,14 @@ void main() {
 }
 
 class ChooseBooksScreen extends StatefulWidget {
+  Color _getRandomPastelColor() {
+    Random random = Random();
+    int red = 150 + random.nextInt(50); // R in RGB
+    int green = 150 + random.nextInt(50); // G in RGB
+    int blue = 150 + random.nextInt(50); // B in RGB
+    return Color.fromRGBO(red, green, blue, 1.0);
+  }
+
   @override
   _ChooseBooksScreenState createState() => _ChooseBooksScreenState();
 }
@@ -126,6 +135,7 @@ class _ChooseBooksScreenState extends State<ChooseBooksScreen> {
               ),
               itemCount: _books.length,
               itemBuilder: (context, index) {
+                Color randomColor = widget._getRandomPastelColor();
                 var book = _books[index]['volumeInfo'];
                 return GestureDetector(
                   onTap: () async {
@@ -142,6 +152,7 @@ class _ChooseBooksScreenState extends State<ChooseBooksScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
+                          color: randomColor,
                           height: 100,
                           alignment: Alignment.center,
                           child: CachedNetworkImage(
