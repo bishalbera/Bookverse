@@ -1,3 +1,5 @@
+import 'package:book_verse/features/home/home_screen.dart';
+import 'package:book_verse/utils/move_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -46,7 +48,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               height: 20,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                moveScreen(context, const HomeScreen(),
+                    isPushReplacement: true);
+              },
               style: ElevatedButton.styleFrom(
                 primary: Colors.deepPurple,
                 elevation: 13,
