@@ -1,14 +1,20 @@
 import 'dart:math';
 
+import 'package:book_verse/common/constants/constants.dart';
 import 'package:book_verse/features/room_preview/widgets/animated_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../common/stylish_drawer.dart';
 import '../../utils/appBar.dart';
+import '../../utils/move_screen.dart';
+import '../choose_book/choose_book_screen.dart';
+import '../database/controllers/database_controller.dart';
+import '../database/models/room.dart';
 
 class RoomPreviewScreen extends StatefulWidget {
-  const RoomPreviewScreen({Key? key}) : super(key: key);
+  final String roomCode;
+  const RoomPreviewScreen({Key? key, required this.roomCode}) : super(key: key);
 
   @override
   State<RoomPreviewScreen> createState() => _RoomPreviewScreenState();
@@ -305,7 +311,21 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
               const SizedBox(
                 height: 14,
               ),
-              MyAnimatedButton(),
+              InkWell(
+                onTap: () {
+                  DataBaseController controller = DataBaseController();
+
+                  RoomModel model = RoomModel(
+                      name: roomName,
+                      roomCode: widget.roomCode,
+                      participants: [firebaseAuth.currentUser?.uid ?? ''],
+                      roomTheme: selectedImageUrl,
+                      createdByUid: firebaseAuth.currentUser?.uid ?? '');
+                  controller.createRoomInFirebase(context, model);
+                  moveScreen(context, ChooseBooksScreen());
+                },
+                child: MyAnimatedButton(),
+              ),
               const SizedBox(
                 height: 10,
               ),

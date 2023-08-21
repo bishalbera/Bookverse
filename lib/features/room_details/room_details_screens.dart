@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:book_verse/features/database/controllers/database_controller.dart';
+import 'package:book_verse/features/database/models/room.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -59,7 +61,9 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen>
 
   void _onTapUp(TapUpDetails details) {
     _controller.reverse();
-    moveScreen(context, RoomPreviewScreen());
+
+   
+    moveScreen(context, RoomPreviewScreen(roomCode: roomCode,));
   }
 
   @override

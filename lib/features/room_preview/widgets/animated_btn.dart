@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/move_screen.dart';
 import '../../choose_book/choose_book_screen.dart';
+import '../../database/controllers/database_controller.dart';
+import '../../database/models/room.dart';
 
 class MyAnimatedButton extends StatefulWidget {
   @override
@@ -14,7 +16,6 @@ class _MyAnimatedButtonState extends State<MyAnimatedButton> {
   void _toggleButtonState() {
     setState(() {
       _isPressed = !_isPressed;
-      moveScreen(context, ChooseBooksScreen());
     });
   }
 
