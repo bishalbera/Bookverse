@@ -1,3 +1,4 @@
+import 'package:book_verse/common/constants/constants.dart';
 import 'package:book_verse/features/auth/screens/signIn_screen.dart';
 import 'package:book_verse/features/profile/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -37,7 +38,7 @@ Widget buildStylishDrawer(BuildContext context) {
               decoration: BoxDecoration(
                 color: headerGreen,
               ),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -49,7 +50,7 @@ Widget buildStylishDrawer(BuildContext context) {
                     height: 10.0,
                   ),
                   Text(
-                    'User Name',
+                    currentUserName ?? "name",
                     style: TextStyle(
                       fontSize: 22.0,
                       color: Colors.white,
@@ -57,7 +58,7 @@ Widget buildStylishDrawer(BuildContext context) {
                     ),
                   ),
                   Text(
-                    "email",
+                    currentUserEmail ?? "email",
                     style: TextStyle(
                       fontSize: 18.0,
                       color: Colors.white,

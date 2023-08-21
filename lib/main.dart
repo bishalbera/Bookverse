@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const SignUpScreen(),
+      home: const SplashScreen(),
     );
   }
 }
