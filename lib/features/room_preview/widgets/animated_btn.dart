@@ -1,11 +1,22 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
+import '../../../common/constants/constants.dart';
 import '../../../utils/move_screen.dart';
 import '../../choose_book/choose_book_screen.dart';
 import '../../database/controllers/database_controller.dart';
 import '../../database/models/room.dart';
 
 class MyAnimatedButton extends StatefulWidget {
+  final String roomName;
+  final String roomCode;
+  final String selectedImageUrl;
+  const MyAnimatedButton({
+    Key? key,
+    required this.roomName,
+    required this.roomCode,
+    required this.selectedImageUrl,
+  }) : super(key: key);
   @override
   _MyAnimatedButtonState createState() => _MyAnimatedButtonState();
 }
@@ -15,7 +26,17 @@ class _MyAnimatedButtonState extends State<MyAnimatedButton> {
 
   void _toggleButtonState() {
     setState(() {
-      _isPressed = !_isPressed;
+      DataBaseController controller = DataBaseController();
+
+      RoomModel model = RoomModel(
+          name: widget.roomName,
+          roomCode: widget.roomCode,
+          participants: [firebaseAuth.currentUser?.uid ?? ''],
+          roomTheme: widget.selectedImageUrl,
+          createdByUid: firebaseAuth.currentUser?.uid ?? '');
+
+      controller.createRoomInFirebase(context, model);
+      moveScreen(context, ChooseBooksScreen());
     });
   }
 

@@ -68,7 +68,6 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
   void initState() {
     super.initState();
     getRandomImageUrl();
-    roomNameController.text = roomName;
   }
 
   void editRoomName() {
@@ -318,19 +317,11 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
                 height: 14,
               ),
               InkWell(
-                onTap: () {
-                  DataBaseController controller = DataBaseController();
-
-                  RoomModel model = RoomModel(
-                      name: roomName,
-                      roomCode: widget.roomCode,
-                      participants: [firebaseAuth.currentUser?.uid ?? ''],
-                      roomTheme: selectedImageUrl,
-                      createdByUid: firebaseAuth.currentUser?.uid ?? '');
-                  controller.createRoomInFirebase(context, model);
-                  moveScreen(context, ChooseBooksScreen());
-                },
-                child: MyAnimatedButton(),
+                onTap: () {},
+                child: MyAnimatedButton(
+                    roomCode: widget.roomCode,
+                    roomName: roomName,
+                    selectedImageUrl: selectedImageUrl),
               ),
               const SizedBox(
                 height: 10,

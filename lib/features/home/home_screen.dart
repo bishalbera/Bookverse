@@ -219,16 +219,21 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.blueAccent),
-                          onPressed: () {
+                        InkWell(
+                          onTap: () {
                             moveScreen(context, JoinRoomScreen());
                           },
-                          child: Text(
-                            "Join a Room",
-                            style: GoogleFonts.roboto(
-                              color: Colors.white,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.blueAccent),
+                            onPressed: () {
+                            moveScreen(context, JoinRoomScreen());
+                            },
+                            child: Text(
+                              "Join a Room",
+                              style: GoogleFonts.roboto(
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
