@@ -3,6 +3,7 @@ import 'package:book_verse/features/profile/profile_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'features/room_details/room_details_screens.dart';
 import 'features/splash/splash_screen.dart';
 
 void main() async {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const ProfileScreen(),
+      home: RoomDetailsScreen(),
     );
   }
 }

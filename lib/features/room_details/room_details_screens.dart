@@ -62,8 +62,11 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen>
   void _onTapUp(TapUpDetails details) {
     _controller.reverse();
 
-   
-    moveScreen(context, RoomPreviewScreen(roomCode: roomCode,));
+    moveScreen(
+        context,
+        RoomPreviewScreen(
+          roomCode: roomCode,
+        ));
   }
 
   @override
@@ -94,7 +97,7 @@ class _RoomDetailsScreenState extends State<RoomDetailsScreen>
                     borderRadius: BorderRadius.circular(10.0),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.4),
+                        color: Colors.deepPurpleAccent.withOpacity(0.4),
                         offset: Offset(5.0, 5.0),
                         blurRadius: 5.0,
                       ),
