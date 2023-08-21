@@ -19,7 +19,11 @@ Widget buildStylishDrawer(BuildContext context) {
     child: Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
+<<<<<<< HEAD
           colors: [primaryPurple, beige],
+=======
+          colors: [primaryPurple, secondaryPeach],
+>>>>>>> 66cc57611acbd4e86cfd517623ebf9a767ca662c
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -30,7 +34,11 @@ Widget buildStylishDrawer(BuildContext context) {
           Container(
             padding: const EdgeInsets.only(top: 40.0, bottom: 20.0),
             decoration: BoxDecoration(
+<<<<<<< HEAD
               color: primaryPurple,
+=======
+              color: beige,
+>>>>>>> 66cc57611acbd4e86cfd517623ebf9a767ca662c
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,6 +67,11 @@ Widget buildStylishDrawer(BuildContext context) {
                 ),
               ],
             ),
+          ),
+          Divider(
+            height: 1,
+            color: Colors.grey,
+            thickness: 3,
           ),
           // ListTiles for different options
           // You can customize the icons and text as needed
