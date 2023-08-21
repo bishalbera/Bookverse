@@ -19,11 +19,7 @@ Widget buildStylishDrawer(BuildContext context) {
     child: Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-<<<<<<< HEAD
-          colors: [primaryPurple, beige],
-=======
           colors: [primaryPurple, secondaryPeach],
->>>>>>> 66cc57611acbd4e86cfd517623ebf9a767ca662c
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -34,11 +30,7 @@ Widget buildStylishDrawer(BuildContext context) {
           Container(
             padding: const EdgeInsets.only(top: 40.0, bottom: 20.0),
             decoration: BoxDecoration(
-<<<<<<< HEAD
-              color: primaryPurple,
-=======
               color: beige,
->>>>>>> 66cc57611acbd4e86cfd517623ebf9a767ca662c
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -54,7 +46,7 @@ Widget buildStylishDrawer(BuildContext context) {
                   userName ?? "Guest User",
                   style: TextStyle(
                     fontSize: 22.0,
-                    color: Colors.white,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -62,7 +54,7 @@ Widget buildStylishDrawer(BuildContext context) {
                   currentUserEmail ?? "",
                   style: TextStyle(
                     fontSize: 18.0,
-                    color: Colors.white70,
+                    color: Colors.black,
                   ),
                 ),
               ],

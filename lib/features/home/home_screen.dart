@@ -1,13 +1,16 @@
-import 'package:book_verse/features/join_room/screens/join_room_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:math';
 
 import '../../common/bottom_navigation_bar.dart';
 import '../../common/stylish_drawer.dart';
 import '../../utils/appBar.dart';
 import '../../utils/move_screen.dart';
 import '../room_creation/room_creation_screen.dart';
+import '../join_room/screens/join_room_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,18 +22,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String _greeting = "";
   String _formattedDate = "";
-  String _featuredBookTitle =
-      "The Book of the Month"; // Replace with actual data
-  List<String> _recommendedBooks = [
-    "Book 1",
-    "Book 2",
-    "Book 3"
-  ]; // Replace with actual data
+  String _featuredBookTitle = "";
+  List<String> _recommendedBooks = [];
+  List<String> _bookImages = [];
 
   @override
   void initState() {
     super.initState();
     _initializeData();
+    _fetchBooks();
   }
 
   void _initializeData() {
@@ -45,6 +45,29 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     _formattedDate = DateFormat("d MMMM, yyyy").format(now);
+  }
+
+  Future<void> _fetchBooks() async {
+    try {
+      final response = await http.get(
+        Uri.parse('https://www.googleapis.com/books/v1/volumes?q=random'),
+      );
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        setState(() {
+          _featuredBookTitle = data['items'][0]['volumeInfo']['title'];
+          _recommendedBooks = List.generate(3, (index) {
+            return data['items'][index + 1]['volumeInfo']['title'];
+          });
+          _bookImages = List.generate(4, (index) {
+            return data['items'][index]['volumeInfo']['imageLinks']
+                ['thumbnail'];
+          });
+        });
+      }
+    } catch (error) {
+      print('Error fetching books: $error');
+    }
   }
 
   @override
@@ -85,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 24.0), // Increased spacing
+                    SizedBox(height: 24.0),
                     Text(
                       "Featured Book of the Month",
                       style: TextStyle(
@@ -103,7 +126,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         borderRadius: BorderRadius.circular(12),
                         color: Colors.white,
                         image: DecorationImage(
-                          image: AssetImage("assets/book_cover.jpg"),
+                          image: NetworkImage(_bookImages.isNotEmpty
+                              ? _bookImages[
+                                  Random().nextInt(_bookImages.length)]
+                              : ''),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -128,10 +154,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 0.0),
                         child: ElevatedButton(
-                            onPressed: () {}, child: Text("Read it")),
+                          onPressed: () {},
+                          child: Text("Read it"),
+                        ),
                       ),
                     ),
-                    SizedBox(height: 24.0), // Increased spacing
+                    SizedBox(height: 24.0),
                     Text(
                       "Personalized Recommendations",
                       style: TextStyle(
@@ -152,21 +180,31 @@ class _HomeScreenState extends State<HomeScreen> {
                             margin: EdgeInsets.symmetric(horizontal: 8.0),
                             child: Container(
                               width: 100,
-                              child: Center(
-                                child: Text(
-                                  _recommendedBooks[index],
-                                  style: TextStyle(fontSize: 16.0),
-                                ),
+                              child: Column(
+                                children: [
+                                  Image.network(
+                                    _bookImages.isNotEmpty
+                                        ? _bookImages[Random()
+                                            .nextInt(_bookImages.length)]
+                                        : '',
+                                    height: 100,
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  Text(
+                                    _recommendedBooks[index],
+                                    style: TextStyle(fontSize: 8.0),
+                                  ),
+                                ],
                               ),
                             ),
                           );
                         },
                       ),
                     ),
-                    SizedBox(height: 32.0), // Increased spacing
+                    SizedBox(height: 32.0),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment
-                          .spaceEvenly, // Improved button alignment
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(primary: Colors.blue),
