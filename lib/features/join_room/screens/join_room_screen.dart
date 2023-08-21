@@ -30,7 +30,7 @@ class _JoinRoomScreenState extends State<JoinRoomScreen>
     )..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           _animationController.reverse();
-        } else if (status == AnimationStatus.dismissed) {
+      } else if (status == AnimationStatus.dismissed) {
           _animationController.forward();
         }
       });

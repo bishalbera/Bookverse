@@ -35,9 +35,8 @@ class _MyCustomBottomNavigationBarState
         ],
       ),
       child: SafeArea(
-        
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0),
           child: GNav(
             tabs: [
               GButton(
@@ -48,10 +47,6 @@ class _MyCustomBottomNavigationBarState
                 icon: Icons.book_outlined,
                 text: 'Read books',
               ),
-              // GButton(
-              //   icon: Icons.redeem,
-              //   text: 'Code redeem',
-              // ),
               GButton(
                 icon: Icons.person,
                 text: 'Profile',

@@ -19,7 +19,7 @@ Widget buildStylishDrawer(BuildContext context) {
     child: Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [primaryGreen, secondaryGreen],
+          colors: [primaryPurple, beige],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -30,7 +30,7 @@ Widget buildStylishDrawer(BuildContext context) {
           Container(
             padding: const EdgeInsets.only(top: 40.0, bottom: 20.0),
             decoration: BoxDecoration(
-              color: headerGreen,
+              color: primaryPurple,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,7 +43,7 @@ Widget buildStylishDrawer(BuildContext context) {
                 ),
                 SizedBox(height: 10.0),
                 Text(
-                  currentUserName ?? "Guest User",
+                  userName ?? "Guest User",
                   style: TextStyle(
                     fontSize: 22.0,
                     color: Colors.white,

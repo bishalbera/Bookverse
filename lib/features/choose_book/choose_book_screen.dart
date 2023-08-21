@@ -5,8 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import '../../../common/bottom_navigation_bar.dart';
-
 void main() {
   runApp(MaterialApp(
     home: ChooseBooksScreen(),
@@ -58,7 +56,6 @@ class _ChooseBooksScreenState extends State<ChooseBooksScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: MyCustomBottomNavigationBar(),
       appBar: AppBar(
         title: Text(
           'Book Search',
@@ -127,6 +124,8 @@ class _ChooseBooksScreenState extends State<ChooseBooksScreen> {
               itemCount: _books.length,
               itemBuilder: (context, index) {
                 var book = _books[index]['volumeInfo'];
+                var authors = book['authors'] ?? ['Unknown Author'];
+
                 return GestureDetector(
                   onTap: () async {
                     Navigator.push(
@@ -158,7 +157,17 @@ class _ChooseBooksScreenState extends State<ChooseBooksScreen> {
                             book['title'],
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 12,
+                              fontSize: 10,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: Text(
+                            'Author(s): ${authors.join(', ')}',
+                            style: TextStyle(
+                              fontSize: 10,
                             ),
                             textAlign: TextAlign.center,
                           ),
