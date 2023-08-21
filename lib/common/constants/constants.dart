@@ -4,6 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 String? currentUserName = FirebaseAuth.instance.currentUser?.displayName;
 String? currentUserEmail = FirebaseAuth.instance.currentUser?.email;
 
+const appName = "TheBookVerse";
+const appTagLine = "Connecting Readers, One Verse at a Time";
+
 String userName = "";
 
 int selectedIndex = 0;
