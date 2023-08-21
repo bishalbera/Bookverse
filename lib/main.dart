@@ -1,4 +1,5 @@
 import 'package:book_verse/features/auth/screens/signup_screen.dart';
+import 'package:book_verse/features/profile/profile_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const SplashScreen(),
+      home: const ProfileScreen(),
     );
   }
 }
