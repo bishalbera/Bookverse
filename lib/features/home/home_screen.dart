@@ -1,3 +1,4 @@
+import 'package:book_verse/features/join_room/screens/join_room_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -184,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: ElevatedButton.styleFrom(
                               primary: Colors.blueAccent),
                           onPressed: () {
-                            // Action for "Join a Public/Private Room" button
+                            moveScreen(context, JoinRoomScreen());
                           },
                           child: Text(
                             "Join a Room",
