@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../features/choose_book/choose_book_screen.dart';
+import '../features/code_redeem/code_redeemtion_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/room_creation/room_creation_screen.dart';
 import '../features/room_preview/room_preview_screen.dart';
@@ -129,17 +130,17 @@ Widget buildStylishDrawer(BuildContext context) {
             ),
             ListTile(
               leading: const Icon(
-                Icons.preview,
+                Icons.roofing,
                 color: Colors.white,
               ),
               title: const Text(
-                'Room preview',
+                'Redeem a Code',
                 style: TextStyle(
                   color: Colors.white,
                 ),
               ),
               onTap: () {
-                moveScreen(context, const RoomPreviewScreen());
+                moveScreen(context, CodeRedemptionScreen());
               },
             ),
             ListTile(

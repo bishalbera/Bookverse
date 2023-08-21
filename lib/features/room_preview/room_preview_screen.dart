@@ -1,16 +1,15 @@
 import 'dart:math';
-
-import 'package:book_verse/common/constants/constants.dart';
-import 'package:book_verse/features/room_preview/widgets/animated_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../common/stylish_drawer.dart';
-import '../../utils/appBar.dart';
-import '../../utils/move_screen.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:book_verse/common/constants/constants.dart';
+import 'package:book_verse/features/room_preview/widgets/animated_btn.dart';
 import '../choose_book/choose_book_screen.dart';
 import '../database/controllers/database_controller.dart';
 import '../database/models/room.dart';
+import '../../common/stylish_drawer.dart';
+import '../../utils/appBar.dart';
+import '../../utils/move_screen.dart';
 
 class RoomPreviewScreen extends StatefulWidget {
   final String roomCode;
@@ -119,6 +118,13 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
     });
   }
 
+  // Function to share a message
+  Future<void> _shareMessage() async {
+    final String message =
+        "Hey there, you can download the BookVerse app from https://github.com/bishalbera/BookVerse, and you can use the code \"${widget.roomCode}\" to join the room!!\n\nHey! I'll meet you at the BookVerseLibrary!\n\nSent from: TheBookVerse\nDate: ${DateTime.now()}";
+    await Share.share(message);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,7 +155,7 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
                     TextButton(
                       onPressed: editRoomName,
                       child: Icon(
-                        Icons.edit, //yes , done bhaiya
+                        Icons.edit,
                         color: Colors.white,
                       ),
                     ),
@@ -286,7 +292,7 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
                 height: 15,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: _shareMessage, // Call the share function here
                 style: ElevatedButton.styleFrom(
                   primary: Colors.deepPurple,
                   elevation: 13,
