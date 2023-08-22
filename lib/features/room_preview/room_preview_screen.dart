@@ -2,6 +2,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:book_verse/common/constants/constants.dart';
 import 'package:book_verse/features/room_preview/widgets/animated_btn.dart';
 import '../choose_book/choose_book_screen.dart';
@@ -46,11 +48,7 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
   String roomName = "Untitled Room";
   TextEditingController roomNameController = TextEditingController();
 
-  List<Person> people = [
-    Person("John Doe", "john@example.com", "Ready"),
-    Person("Jane Smith", "jane@example.com", "Ready"),
-    // Add more people as needed
-  ];
+  List<Person> people = [];
 
   void getRandomImageUrl({int index = 0}) {
     if (index != 0) {
@@ -67,7 +65,50 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
   @override
   void initState() {
     super.initState();
+    DataBaseController controller = DataBaseController();
+
+    RoomModel model = RoomModel(
+        name: roomName,
+        roomCode: widget.roomCode,
+        participants: [firebaseAuth.currentUser?.uid ?? ''],
+        roomTheme: selectedImageUrl,
+        createdByUid: firebaseAuth.currentUser?.uid ?? '');
+
+    controller.createRoomInFirebase(context, model);
     getRandomImageUrl();
+    var data = firestore
+        .collection('rooms')
+        .doc(widget.roomCode)
+        .get()
+        .then((DocumentSnapshot snapshot) {
+      roomName = snapshot.get('name');
+      setState(() {});
+    });
+    fetchPeople();
+  }
+
+  void fetchPeople() async {
+    final roomSnapshot = await FirebaseFirestore.instance
+        .collection('rooms')
+        .doc(widget.roomCode)
+        .get();
+
+    if (roomSnapshot.exists) {
+      final participantUids =
+          List<String>.from(roomSnapshot.data()!['participants']);
+      for (final uid in participantUids) {
+        final userSnapshot =
+            await FirebaseFirestore.instance.collection('users').doc(uid).get();
+        if (userSnapshot.exists) {
+          final person = Person(
+            userSnapshot.data()!['name'],
+            userSnapshot.data()!['email'],
+          );
+          people.add(person);
+        }
+      }
+      setState(() {});
+    }
   }
 
   void editRoomName() {
@@ -271,12 +312,12 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
                         style: GoogleFonts.poppins(
                           color: Colors.white,
                           //sure
-                          fontSize: 13,
+                          fontSize: 12,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                       trailing: Text(
-                        people[index].status,
+                        'Ready',
                         style: GoogleFonts.poppins(
                           color: Colors.white,
                           fontSize: 14,
@@ -326,6 +367,8 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
               const SizedBox(
                 height: 10,
               ),
+
+              // ... rest of the code remains the same
             ],
           ),
         ),
@@ -337,7 +380,9 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
 class Person {
   final String name;
   final String email;
-  final String status;
 
-  Person(this.name, this.email, this.status);
+  Person(this.name, this.email);
 }
+
+// Add the firebaseAuth instance at the beginning of the file
+final FirebaseAuth firebaseAuth = FirebaseAuth.instance;

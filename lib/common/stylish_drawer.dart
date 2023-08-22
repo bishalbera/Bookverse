@@ -1,3 +1,5 @@
+import 'package:book_verse/features/join_room/screens/join_room_screen.dart';
+import 'package:book_verse/features/rooms/screens/rooms_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../features/choose_book/choose_book_screen.dart';
@@ -5,7 +7,7 @@ import '../features/code_redeem/code_redeemtion_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/profile/profile_screen.dart';
 import '../features/room_creation/room_creation_screen.dart';
-import '../features/room_preview/room_preview_screen.dart';
+
 import '../features/auth/screens/signIn_screen.dart';
 import '../utils/move_screen.dart';
 import 'constants/constants.dart';
@@ -69,12 +71,16 @@ Widget buildStylishDrawer(BuildContext context) {
           // You can customize the icons and text as needed
           buildDrawerTile(
               Icons.home, 'Home', () => moveScreen(context, HomeScreen())),
+          buildDrawerTile(Icons.library_books, 'Rooms',
+              () => moveScreen(context, RoomsScreen())),
           buildDrawerTile(Icons.person, 'Profile',
               () => moveScreen(context, ProfileScreen())),
           buildDrawerTile(Icons.book_outlined, 'Choose Book',
               () => moveScreen(context, ChooseBooksScreen())),
-          buildDrawerTile(Icons.roofing, 'Create Room',
+          buildDrawerTile(Icons.roofing, 'Create a Room',
               () => moveScreen(context, RoomCreationScreen())),
+          buildDrawerTile(Icons.roofing, 'Join a Room',
+              () => moveScreen(context, JoinRoomScreen())),
           buildDrawerTile(Icons.roofing, 'Redeem a Code',
               () => moveScreen(context, CodeRedemptionScreen())),
           buildDrawerTile(Icons.logout, 'Logout', () {
