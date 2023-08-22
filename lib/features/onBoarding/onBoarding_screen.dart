@@ -39,13 +39,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             SizedBox(
               height: 10,
             ),
-            Text(
-              'A place where you can connect with your friends and family',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.roboto(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: Colors.grey,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              child: Text(
+                'A place where you can connect with your friends and family and read amazing books!',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.roboto(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.grey,
+                ),
               ),
             ),
             SizedBox(
