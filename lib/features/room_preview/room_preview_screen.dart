@@ -65,16 +65,7 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
   @override
   void initState() {
     super.initState();
-    DataBaseController controller = DataBaseController();
 
-    RoomModel model = RoomModel(
-        name: roomName,
-        roomCode: widget.roomCode,
-        participants: [firebaseAuth.currentUser?.uid ?? ''],
-        roomTheme: selectedImageUrl,
-        createdByUid: firebaseAuth.currentUser?.uid ?? '');
-
-    controller.createRoomInFirebase(context, model);
     getRandomImageUrl();
     var data = firestore
         .collection('rooms')
@@ -182,96 +173,98 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
               fit: BoxFit.cover,
             ),
           ),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 30,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 18.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(
-                      onPressed: editRoomName,
-                      child: Icon(
-                        Icons.edit,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 2,
-                    ),
-                    Text(
-                      roomName,
-                      style: GoogleFonts.barriecito(
-                        color: Colors.white,
-                        fontSize: 32,
-                      ),
-                    ),
-                  ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 30,
                 ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Text(
-                "Please Choose a study room theme",
-                style: GoogleFonts.ptSans(
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
+                Padding(
+                  padding: const EdgeInsets.only(right: 18.0),
                   child: Row(
-                    children: List.generate(
-                      themeNames.length,
-                      (index) => GestureDetector(
-                        onTap: () => selectTheme(index),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: selectedThemeIndex == index
-                                    ? Colors.green
-                                    : Colors.transparent,
-                                width: 2,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        onPressed: editRoomName,
+                        child: Icon(
+                          Icons.edit,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 2,
+                      ),
+                      Text(
+                        roomName,
+                        style: GoogleFonts.barriecito(
+                          color: Colors.white,
+                          fontSize: 32,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "Please Choose a study room theme",
+                  style: GoogleFonts.ptSans(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: List.generate(
+                        themeNames.length,
+                        (index) => GestureDetector(
+                          onTap: () => selectTheme(index),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: selectedThemeIndex == index
+                                      ? Colors.green
+                                      : Colors.transparent,
+                                  width: 2,
+                                ),
                               ),
-                            ),
-                            child: Column(
-                              children: [
-                                Container(
-                                  width: 120,
-                                  height: 160,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    image: DecorationImage(
-                                      image: NetworkImage(images[index]),
-                                      fit: BoxFit.cover,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: 120,
+                                    height: 160,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      image: DecorationImage(
+                                        image: NetworkImage(images[index]),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    themeNames[index],
-                                    style: GoogleFonts.poppins(
-                                      color: selectedThemeIndex == index
-                                          ? Colors.green
-                                          : Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      themeNames[index],
+                                      style: GoogleFonts.poppins(
+                                        color: selectedThemeIndex == index
+                                            ? Colors.green
+                                            : Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -279,97 +272,130 @@ class _RoomPreviewScreenState extends State<RoomPreviewScreen> {
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 40),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.lightBlue.shade100, Colors.blue.shade900],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(12),
+                const SizedBox(
+                  height: 15,
                 ),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: people.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      tileColor: Colors.grey,
-                      title: Text(
-                        people[index].name,
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 40),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.lightBlue.shade100, Colors.blue.shade900],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: people.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        tileColor: Colors.grey,
+                        title: Text(
+                          people[index].name,
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      subtitle: Text(
-                        people[index].email,
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          //sure
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
+                        subtitle: Text(
+                          people[index].email,
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            //sure
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                      trailing: Text(
-                        'Ready',
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontSize: 14,
-                          // fontWeight: FontWeight.bold,
+                        trailing: Text(
+                          'Ready',
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontSize: 14,
+                            // fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              ElevatedButton(
-                onPressed: _shareMessage, // Call the share function here
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.deepPurple,
-                  elevation: 13,
-                  shadowColor: Colors.deepPurpleAccent.withOpacity(0.9),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 16,
+                      );
+                    },
                   ),
                 ),
-                child: Text(
-                  'Invite your friends',
-                  style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                const SizedBox(
+                  height: 15,
+                ),
+                ElevatedButton(
+                  onPressed: _shareMessage, // Call the share function here
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.deepPurple,
+                    elevation: 13,
+                    shadowColor: Colors.deepPurpleAccent.withOpacity(0.9),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 16,
+                    ),
+                  ),
+                  child: Text(
+                    'Invite your friends',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 14,
-              ),
-              InkWell(
-                onTap: () {},
-                child: MyAnimatedButton(
-                    roomCode: widget.roomCode,
-                    roomName: roomName,
-                    selectedImageUrl: selectedImageUrl),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
+                const SizedBox(
+                  height: 14,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    DataBaseController controller = DataBaseController();
 
-              // ... rest of the code remains the same
-            ],
+                    RoomModel model = RoomModel(
+                        name: roomName,
+                        roomCode: widget.roomCode,
+                        participants: [firebaseAuth.currentUser?.uid ?? ''],
+                        roomTheme: selectedImageUrl,
+                        createdByUid: firebaseAuth.currentUser?.uid ?? '');
+
+                    controller.createRoomInFirebase(context, model);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                    onPrimary: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 12,
+                    ),
+                    textStyle: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    elevation: 3,
+                    shadowColor: Colors.black.withOpacity(0.2),
+                  ),
+                  child: Text('Create Room'),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: MyAnimatedButton(
+                      roomCode: widget.roomCode,
+                      roomName: roomName,
+                      selectedImageUrl: selectedImageUrl),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
           ),
         ),
       ),

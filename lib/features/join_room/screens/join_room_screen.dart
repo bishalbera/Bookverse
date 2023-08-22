@@ -1,4 +1,11 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:book_verse/utils/show_snackBar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../../../common/constants/constants.dart';
+import '../../room_preview/room_preview_screen.dart';
 
 class JoinRoomScreen extends StatefulWidget {
   const JoinRoomScreen({Key? key}) : super(key: key);
@@ -30,7 +37,7 @@ class _JoinRoomScreenState extends State<JoinRoomScreen>
     )..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           _animationController.reverse();
-      } else if (status == AnimationStatus.dismissed) {
+        } else if (status == AnimationStatus.dismissed) {
           _animationController.forward();
         }
       });
@@ -42,6 +49,40 @@ class _JoinRoomScreenState extends State<JoinRoomScreen>
     _roomCodeController.dispose();
     _animationController.dispose();
     super.dispose();
+  }
+
+  void joinRoom() async {
+    String roomCode = _roomCodeController.text;
+
+    // Check if the room with the provided room code exists in Firestore
+    final roomSnapshot = await FirebaseFirestore.instance
+        .collection('rooms')
+        .doc(roomCode)
+        .get();
+
+    if (roomSnapshot.exists) {
+      // Add the user's UID to the participants list
+      final participantUids =
+          List<String>.from(roomSnapshot.data()!['participants']);
+      participantUids.add(FirebaseAuth.instance.currentUser?.uid ?? '');
+
+      // Update the participants field in Firestore
+      await FirebaseFirestore.instance
+          .collection('rooms')
+          .doc(roomCode)
+          .update({'participants': participantUids});
+
+      // Navigate to the RoomPreviewScreen with the provided room code
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => RoomPreviewScreen(roomCode: roomCode),
+        ),
+      );
+    } else {
+      showSnackBar(context, "Failure",
+          "Sorry, but no room exists with that code.", ContentType.warning);
+    }
   }
 
   @override
@@ -120,7 +161,7 @@ class _JoinRoomScreenState extends State<JoinRoomScreen>
               ),
               SizedBox(height: 30),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: joinRoom,
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,
                   onPrimary: Colors.white,
