@@ -6,12 +6,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:book_verse/common/constants/constants.dart';
 import 'package:book_verse/features/room_preview/widgets/animated_btn.dart';
-import '../choose_book/choose_book_screen.dart';
 import '../database/controllers/database_controller.dart';
 import '../database/models/room.dart';
 import '../../common/stylish_drawer.dart';
 import '../../utils/appBar.dart';
-import '../../utils/move_screen.dart';
 
 class RoomPreviewScreen extends StatefulWidget {
   final String roomCode;
