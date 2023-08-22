@@ -38,6 +38,9 @@ present: it allows user to view their verseCoins, and their status(statistics).
 TheBookVerse app's intuitive design guarantees a smooth navigation experience, while its features foster an active and engaged community of book lovers. By embracing the allure of reading and connecting with others virtually, the app transforms solitary reading into a shared adventure, encouraging lively discussions, recommendations, and a deeper appreciation for the written word. Whether users seek a relaxing solo reading session or an interactive literary journey with friends, TheBookVerse provides a comprehensive platform that caters to all reading desires.
 
 
+## Demo Video
+Here's the demo video of this [project](https://www.youtube.com/watch?v=Db4g-ab7MqY) if you want you can check this.
+
 ## Getting Started
 
 To get started with SkillConnect, follow these steps:
