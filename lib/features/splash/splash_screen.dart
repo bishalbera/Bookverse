@@ -21,14 +21,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    var data = firestore
-        .collection('users')
-        .doc(firebaseAuth.currentUser?.uid ?? '')
-        .get()
-        .then((DocumentSnapshot snapshot) {
-      userName = snapshot.get('name');
-      setState(() {});
-    });
+    if (firebaseAuth.currentUser != null) {
+      var data = firestore
+          .collection('users')
+          .doc(firebaseAuth.currentUser?.uid ?? '')
+          .get()
+          .then((DocumentSnapshot snapshot) {
+        userName = snapshot.get('name');
+        setState(() {});
+      });
+    } else {}
   }
 
   @override
