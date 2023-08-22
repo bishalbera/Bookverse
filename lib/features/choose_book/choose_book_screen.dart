@@ -3,10 +3,13 @@ import 'dart:math';
 
 import 'package:book_verse/common/bottom_navigation_bar.dart';
 import 'package:book_verse/common/button_with_animation.dart';
+import 'package:book_verse/utils/move_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+
+import '../code_getting/screens/code_getting_screen.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -277,9 +280,12 @@ class BookDetailsScreen extends StatelessWidget {
               ),
             const SizedBox(height: 20),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                moveScreen(context, CodeGettingScreen());
+              },
               child: ButtonWithAnimation(),
             ),
+            const SizedBox(height: 20,),
           ],
         ),
       ),

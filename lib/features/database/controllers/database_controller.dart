@@ -11,4 +11,9 @@ class DataBaseController {
     _repository.createRoomInFirebase(context, model);
     //done
   }
+
+  void createCodeInFirebase(BuildContext context, String code) {
+    _repository.createCodeInFirebase(context, code);
+    //done
+  }
 }

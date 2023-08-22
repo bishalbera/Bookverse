@@ -14,10 +14,10 @@ class GlassCard extends StatefulWidget {
 
 class _GlassCardState extends State<GlassCard> {
   String myUserName = "";
+  String verseCoins = "";
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     var data = firestore
         .collection('users')
@@ -25,6 +25,7 @@ class _GlassCardState extends State<GlassCard> {
         .get()
         .then((DocumentSnapshot snapshot) {
       myUserName = snapshot.get('name');
+      verseCoins = snapshot.get('verseCoins');
       setState(() {
         print(myUserName);
       });
@@ -113,7 +114,7 @@ class _GlassCardState extends State<GlassCard> {
                           Padding(
                             padding: const EdgeInsets.all(16),
                             child: Text(
-                              '5.00 🪙',
+                              '$verseCoins 🪙',
                               style: GoogleFonts.nunitoSans(
                                 fontSize: 36,
                                 fontWeight: FontWeight.bold,
@@ -121,7 +122,7 @@ class _GlassCardState extends State<GlassCard> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 10),
+
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Text(
@@ -133,11 +134,37 @@ class _GlassCardState extends State<GlassCard> {
                               ),
                             ),
                           ),
+                          // Added space
                         ],
                       ),
                     ),
                   ),
                 ),
+              ),
+            ),
+            SizedBox(height: 40), // Added space
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'How to earn verseCoins?',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    'You need to read books with your friends for at least 5 mins to get verseCoins (20)',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

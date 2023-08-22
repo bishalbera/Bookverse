@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 import 'dart:convert';
 import 'dart:math';
 
-import '../../common/bottom_navigation_bar.dart';
-import '../../common/stylish_drawer.dart';
-import '../../utils/appBar.dart';
-import '../../utils/move_screen.dart';
-import '../room_creation/room_creation_screen.dart';
+import '../../../common/bottom_navigation_bar.dart';
+import '../../../common/stylish_drawer.dart';
+import '../../../utils/appBar.dart';
+import '../../../utils/move_screen.dart';
 import '../join_room/screens/join_room_screen.dart';
+import '../room_creation/room_creation_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -23,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String _greeting = "";
   String _formattedDate = "";
   String _featuredBookTitle = "";
+  String _featuredBookPreviewLink = "";
   List<String> _recommendedBooks = [];
   List<String> _bookImages = [];
 
@@ -56,6 +58,8 @@ class _HomeScreenState extends State<HomeScreen> {
         final data = jsonDecode(response.body);
         setState(() {
           _featuredBookTitle = data['items'][0]['volumeInfo']['title'];
+          _featuredBookPreviewLink =
+              data['items'][0]['volumeInfo']['previewLink'];
           _recommendedBooks = List.generate(3, (index) {
             return data['items'][index + 1]['volumeInfo']['title'];
           });
@@ -71,6 +75,14 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     } catch (error) {
       print('Error fetching books: $error');
+    }
+  }
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      print('Could not launch $url');
     }
   }
 
@@ -122,33 +134,37 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     SizedBox(height: 8.0),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 80),
-                      height: 200,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Colors.white,
-                        image: DecorationImage(
-                          image: NetworkImage(_bookImages.isNotEmpty
-                              ? _bookImages[
-                                  Random().nextInt(_bookImages.length)]
-                              : ''),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            _featuredBookTitle,
-                            style: TextStyle(
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                    GestureDetector(
+                      onTap: () {
+                        _launchURL(_featuredBookPreviewLink);
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 80),
+                        height: 200,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.white,
+                          image: DecorationImage(
+                            image: NetworkImage(
+                              _bookImages.isNotEmpty ? _bookImages[0] : '',
                             ),
+                            fit: BoxFit.cover,
                           ),
-                        ],
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              _featuredBookTitle,
+                              style: TextStyle(
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -158,7 +174,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 0.0),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _launchURL(_featuredBookPreviewLink);
+                          },
                           child: Text("Read it"),
                         ),
                       ),
@@ -188,8 +206,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: [
                                   Image.network(
                                     _bookImages.isNotEmpty
-                                        ? _bookImages[Random()
-                                            .nextInt(_bookImages.length)]
+                                        ? _bookImages[
+                                            index % _bookImages.length]
                                         : '',
                                     height: 100,
                                     width: double.infinity,
@@ -213,7 +231,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(primary: Colors.blue),
                           onPressed: () {
-                            // Action for "Create a Private Room" button
                             moveScreen(context, RoomCreationScreen());
                           },
                           child: Text(
@@ -244,6 +261,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                "Made with 💖 by Armaan and Bishal",
+                style: GoogleFonts.poppins(
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
               ),
             ),

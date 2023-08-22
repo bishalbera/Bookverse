@@ -21,4 +21,11 @@ class DataBaseRepository {
       );
     });
   }
+
+  void createCodeInFirebase(BuildContext context, String code) {
+    firestore
+        .collection('codes')
+        .doc(code)
+        .set({'code': code, 'value': 20}).then((value) {});
+  }
 }
