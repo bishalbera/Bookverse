@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:book_verse/common/bottom_navigation_bar.dart';
 import 'package:book_verse/common/button_with_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -66,6 +67,7 @@ class _ChooseBooksScreenState extends State<ChooseBooksScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const MyCustomBottomNavigationBar(),
       appBar: AppBar(
         title: Text(
           'Book Search',
