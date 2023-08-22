@@ -1,10 +1,7 @@
-import 'package:book_verse/features/auth/screens/signup_screen.dart';
-import 'package:book_verse/features/profile/profile_screen.dart';
+import 'package:book_verse/features/splash/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'features/room_details/room_details_screens.dart';
-import 'features/splash/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: RoomDetailsScreen(),
+      home: SplashScreen(),
     );
   }
 }

@@ -274,7 +274,10 @@ class BookDetailsScreen extends StatelessWidget {
                 ),
               ),
             const SizedBox(height: 20),
-            ButtonWithAnimation(),
+            InkWell(
+              onTap: () {},
+              child: ButtonWithAnimation(),
+            ),
           ],
         ),
       ),
