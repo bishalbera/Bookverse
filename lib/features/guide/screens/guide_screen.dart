@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GuideScreen extends StatelessWidget {
+  const GuideScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('App Info'),
+        title: const Text('App Info'),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
@@ -37,6 +39,8 @@ class GuideScreen extends StatelessWidget {
             _buildStep('5. Read, Discuss, and Earn Coins.'),
             _buildStep('6. Claim Your Coins in Your Wallet.'),
             _buildStep('7. Enjoy a Unique Reading Experience!'),
+            const SizedBox(height: 20),
+            _buildFooter("Made with 💖 by Armaan and  Bishal"),
           ],
         ),
       ),
@@ -50,6 +54,19 @@ class GuideScreen extends StatelessWidget {
         text,
         style: GoogleFonts.poppins(
           fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFooter(String text) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 10),
+      child: Text(
+        text,
+        style: GoogleFonts.poppins(
+          fontSize: 13,
           fontWeight: FontWeight.bold,
         ),
       ),
