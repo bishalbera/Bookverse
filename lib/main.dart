@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
+        //lol mein idhar type kar rha tha but forgot that I'm not sharing the screen
       ),
       home: SplashScreen(),
     );

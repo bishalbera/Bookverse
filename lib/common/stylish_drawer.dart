@@ -1,21 +1,20 @@
-import 'package:book_verse/features/join_room/screens/join_room_screen.dart';
-import 'package:book_verse/features/rooms/screens/rooms_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../features/choose_book/choose_book_screen.dart';
 import '../features/code_redeem/code_redeemtion_screen.dart';
 import '../features/home/home_screen.dart';
+import '../features/join_room/screens/join_room_screen.dart';
 import '../features/profile/profile_screen.dart';
 import '../features/room_creation/room_creation_screen.dart';
-
 import '../features/auth/screens/signIn_screen.dart';
+import '../features/rooms/screens/rooms_screen.dart';
 import '../utils/move_screen.dart';
 import 'constants/constants.dart';
 
 Widget buildStylishDrawer(BuildContext context) {
-  Color primaryPurple = Color(0xffB2A4FF);
-  Color secondaryPeach = Color(0xffFFB4B4);
-  Color beige = Color(0xffFFDEB4);
+  const Color primaryPurple = Color(0xffB2A4FF);
+  const Color secondaryPeach = Color(0xffFFB4B4);
+  const Color beige = Color(0xffFFDEB4);
 
   return Drawer(
     child: Container(
@@ -43,7 +42,7 @@ Widget buildStylishDrawer(BuildContext context) {
                   backgroundImage: NetworkImage(
                       'https://media.discordapp.net/attachments/1091713413106901112/1143208237173321738/image.png?width=66&height=88'), // Add your profile image asset
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Text(
                   userName ?? "Guest User",
                   style: TextStyle(
@@ -69,23 +68,23 @@ Widget buildStylishDrawer(BuildContext context) {
           ),
           // ListTiles for different options
           // You can customize the icons and text as needed
-          buildDrawerTile(
-              Icons.home, 'Home', () => moveScreen(context, HomeScreen())),
+          buildDrawerTile(Icons.home, 'Home',
+              () => moveScreen(context, const HomeScreen())),
           buildDrawerTile(Icons.library_books, 'Rooms',
               () => moveScreen(context, RoomsScreen())),
           buildDrawerTile(Icons.person, 'Profile',
-              () => moveScreen(context, ProfileScreen())),
+              () => moveScreen(context, const ProfileScreen())),
           buildDrawerTile(Icons.book_outlined, 'Choose Book',
               () => moveScreen(context, ChooseBooksScreen())),
           buildDrawerTile(Icons.roofing, 'Create a Room',
               () => moveScreen(context, RoomCreationScreen())),
           buildDrawerTile(Icons.roofing, 'Join a Room',
-              () => moveScreen(context, JoinRoomScreen())),
+              () => moveScreen(context, const JoinRoomScreen())),
           buildDrawerTile(Icons.roofing, 'Redeem a Code',
-              () => moveScreen(context, CodeRedemptionScreen())),
+              () => moveScreen(context, const CodeRedemptionScreen())),
           buildDrawerTile(Icons.logout, 'Logout', () {
             FirebaseAuth.instance.signOut();
-            moveScreen(context, SignInScreen());
+            moveScreen(context, const SignInScreen());
           }),
         ],
       ),
@@ -98,26 +97,18 @@ Widget buildDrawerTile(IconData icon, String title, void onTap()) {
     leading: Icon(icon, color: Colors.white),
     title: Text(
       title,
-      style: TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.white),
     ),
     onTap: onTap,
-    contentPadding:
-        EdgeInsets.symmetric(horizontal: 16.0), // Add some horizontal padding
-    shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4.0)), // Add rounded corners
+    contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
     hoverColor: Colors
         .white24, // Change the background color when the tile is hovered over
-    focusColor:
-        Colors.white24, // Change the background color when the tile is focused
-    selectedTileColor:
-        Colors.white24, // Change the background color when the tile is selected
-    enableFeedback:
-        true, // Enable haptic feedback when the tile is tapped or long-pressed
-    horizontalTitleGap:
-        8.0, // Reduce the gap between the leading icon and the title text
-    minVerticalPadding:
-        8.0, // Increase the vertical padding to make the tiles taller
-    visualDensity: VisualDensity
-        .compact, // Reduce the visual density to make the tiles more compact
+    focusColor: Colors.white24,
+    selectedTileColor: Colors.white24,
+    enableFeedback: true,
+    horizontalTitleGap: 8.0,
+    minVerticalPadding: 8.0,
+    visualDensity: VisualDensity.compact,
   );
 }
