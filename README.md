@@ -43,7 +43,7 @@ Here's the demo video of this [project](https://www.youtube.com/watch?v=Db4g-ab7
 
 ## Getting Started
 
-To get started with SkillConnect, follow these steps:
+To get started with Bookverse, follow these steps:
 
 1. Clone the SkillConnect repository from GitHub: `git clone https://github.com/bishalbera/Bookverse`
 2. Open in Vs Code.
